@@ -3,6 +3,7 @@ const DATA_CACHE_NAME = "data-cache-v1";
 
 const FILES_TO_CACHE = [
   '/',
+  '/db.js',
   '/index.html',
   '/styles.css',
   '/manifest.webmanifest',
@@ -39,7 +40,7 @@ self.addEventListener("install", function (evt) {
   });
 
   self.addEventListener("fetch", function(evt) {
-    if (evt.request.url.includes("/api/")) {
+    if (evt.request.url.includes("/api/transaction")) {
       console.log('[Service Worker] Fetch (data)', evt.request.url);
 
       evt.respondWith(
