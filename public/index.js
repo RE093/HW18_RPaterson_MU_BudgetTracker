@@ -1,4 +1,6 @@
+let dataArr = [];
 let transactions = [];
+let newIDBdata = [];
 let myChart;
 
 fetch("/api/transaction")
@@ -6,12 +8,32 @@ fetch("/api/transaction")
     return response.json();
   })
   .then(data => {
-    // save db data on global variable
-    transactions = data;
 
-    populateTotal();
-    populateTable();
-    populateChart();
+    dataArr = data;
+
+    // Get the data from indexedDB so that we render that 
+    // with the cached data when the page is reloaded in
+    // offline mode
+
+    const transaction = db.transaction(["pending"], "readonly");
+    const objectStore = transaction.objectStore("pending");
+    const getAll = objectStore.getAll();
+
+    getAll.onsuccess = event => {
+      const indexedData = event.target.result;
+      newIDBdata =  indexedData;
+      console.log("success request " + indexedData);
+
+      console.log("newIDBdata " + newIDBdata);
+
+      let concatArray = newIDBdata.concat(dataArr);
+      transactions = concatArray;
+      console.log(transactions)
+
+      populateTotal();
+      populateTable();
+      populateChart();
+    };
   });
 
 function populateTotal() {

@@ -54,4 +54,5 @@ function checkDatabase() {
   };
 }
 
+// window.addEventListener('load', offlineRender);
 window.addEventListener('online', checkDatabase);
