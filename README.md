@@ -46,13 +46,15 @@
 
 ## Description
 
+This is a progressive web application that uses a web manifest, service worker and indexedDB to allow the website to be functional offline, when the application is online again, the data stored in indexedDB will be added to the database.
+
 ## Installation
 
 n/a
 
 ## Usage
 
-View the app <a href="#">Here</a>
+View the app <a href="https://dry-plateau-00174.herokuapp.com/">Here</a>
 
 ## License
 
